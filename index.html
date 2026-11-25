@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Kora Supply - Study and Desk Essentials</title>
+  <meta name="description" content="Demo e-commerce product website with search, category filters, product details and a basic cart.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <header class="topbar">
+    <a class="brand" href="./" aria-label="Kora Supply home">Kora Supply</a>
+    <div class="search">
+      <label class="sr-only" for="search">Search products</label>
+      <input id="search" type="search" placeholder="Search notebooks, bags, lamps" autocomplete="off">
+    </div>
+    <button id="cartBtn" class="cart-btn" type="button" aria-label="Open cart, 0 items">
+      Cart <span id="cartCount" class="cart-count">0</span>
+    </button>
+  </header>
+
+  <main>
+    <section class="intro">
+      <h1>Gear for the study desk</h1>
+      <p>Notebooks, bags, tech and desk upgrades. Search, filter, check the details and add to your cart.</p>
+    </section>
+
+    <div class="layout">
+      <aside class="filters" aria-label="Filters">
+        <h2 class="filter-title">Category</h2>
+        <div id="categoryList" class="chip-list" role="group" aria-label="Category"></div>
+
+        <h2 class="filter-title">Price</h2>
+        <label class="sr-only" for="priceFilter">Price range</label>
+        <select id="priceFilter">
+          <option value="any">Any price</option>
+          <option value="under500">Under ₹500</option>
+          <option value="500to1000">₹500 to ₹1,000</option>
+          <option value="over1000">Over ₹1,000</option>
+        </select>
+
+        <button id="clearFilters" class="link-btn" type="button">Clear all filters</button>
+      </aside>
+
+      <section class="results" aria-label="Products">
+        <div class="results-bar">
+          <p id="resultCount" class="result-count" aria-live="polite"></p>
+          <div class="sort">
+            <label for="sortBy">Sort by</label>
+            <select id="sortBy">
+              <option value="featured">Featured</option>
+              <option value="priceLow">Price: low to high</option>
+              <option value="priceHigh">Price: high to low</option>
+              <option value="rating">Top rated</option>
+            </select>
+          </div>
+        </div>
+
+        <div id="grid" class="grid"></div>
+
+        <div id="empty" class="empty" hidden>
+          <p id="emptyText"></p>
+          <button id="emptyClear" class="btn btn-primary" type="button">Clear search and filters</button>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <p>Kora Supply is a demo store built for practice. No real orders or payments are processed.</p>
+  </footer>
+
+  <!-- Product details -->
+  <dialog id="detail" class="detail" aria-labelledby="detailTitle">
+    <button id="detailClose" class="icon-btn" type="button" aria-label="Close product details">&times;</button>
+    <div class="detail-body">
+      <div id="detailThumb" class="thumb thumb-lg" aria-hidden="true"></div>
+      <div class="detail-info">
+        <p id="detailCategory" class="detail-cat"></p>
+        <h2 id="detailTitle"></h2>
+        <p id="detailRating" class="rating"></p>
+        <p id="detailPrice" class="detail-price"></p>
+        <p id="detailDesc" class="detail-desc"></p>
+        <ul id="detailSpecs" class="specs"></ul>
+        <div class="detail-actions">
+          <div class="qty" role="group" aria-label="Quantity">
+            <button id="qtyMinus" type="button" aria-label="Decrease quantity">&minus;</button>
+            <output id="qtyValue">1</output>
+            <button id="qtyPlus" type="button" aria-label="Increase quantity">+</button>
+          </div>
+          <button id="detailAdd" class="btn btn-primary" type="button">Add to cart</button>
+        </div>
+      </div>
+    </div>
+  </dialog>
+
+  <!-- Cart drawer -->
+  <div id="scrim" class="scrim" hidden></div>
+  <aside id="drawer" class="drawer" role="dialog" aria-modal="true" aria-labelledby="drawerTitle" inert>
+    <div class="drawer-head">
+      <h2 id="drawerTitle">Your cart</h2>
+      <button id="drawerClose" class="icon-btn" type="button" aria-label="Close cart">&times;</button>
+    </div>
+    <ul id="cartItems" class="cart-items"></ul>
+    <p id="cartEmpty" class="cart-empty">Your cart is empty. Add something from the store.</p>
+    <div id="cartFooter" class="cart-footer" hidden>
+      <p id="shipNote" class="ship-note"></p>
+      <dl class="totals">
+        <div><dt>Subtotal</dt><dd id="subtotal"></dd></div>
+        <div><dt>Delivery</dt><dd id="delivery"></dd></div>
+        <div class="grand"><dt>Total</dt><dd id="total"></dd></div>
+      </dl>
+      <button id="checkoutBtn" class="btn btn-primary btn-block" type="button">Place demo order</button>
+      <button id="clearCart" class="link-btn" type="button">Empty cart</button>
+    </div>
+  </aside>
+
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+  <script src="script.js"></script>
+</body>
+</html>
